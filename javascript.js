@@ -9,15 +9,17 @@ let todoData = [];
 
 
 
-let jsonStringify = function() {
-    let jsonRecord = JSON.stringify(todoData);
-    localStorage.toDo = jsonRecord;
+let jsonSave = function() {
+    let a = JSON.stringify(todoData);
+    localStorage.toDo = a;
 };
 
-let jsonParse = function() {
-    let jsonParse = localStorage.toDo;
-    todoData = JSON.parse(jsonParse);
-    return todoData;
+let jsonDisplay = function() {
+    if (todoData === []) {
+        let b = localStorage.toDo;
+        console.log(b);
+        todoData = JSON.parse(b);
+    }
 };
 
 const render = function() {
@@ -44,14 +46,14 @@ const render = function() {
         btnComplete.addEventListener('click', function() {
             item.complete = !item.complete;
             render();
-            jsonStringify();
+            jsonSave();
         });
         // Удаляем элемент
         const btnRemove = li.querySelector('.todo-remove');
         btnRemove.addEventListener('click', function() {
             todoData.splice(i, 1);
-            jsonStringify();
-            jsonParse();
+            jsonSave();
+            jsonDisplay();
             render();
         });
     });
@@ -68,10 +70,11 @@ todoControl.addEventListener('submit', function(event) {
             complete: false
         };
         todoData.push(newTodo);
-        jsonStringify();
+        jsonSave();
         render();
     }
 });
 
-jsonParse();
+jsonDisplay();
+
 render();
