@@ -36,7 +36,6 @@ const render = function() {
         // Проверка элемента на - выполнил или нет
         if (item.complete) {
             todoCompleted.append(li);
-            jsonStringify();
         } else {
             todoList.append(li);
         }
@@ -61,12 +60,12 @@ const render = function() {
 };
 
 todoControl.addEventListener('submit', function(event) {
-    if (headerInput.value === '') {
-        alert('Необходимо написать план!');
+    event.preventDefault();
+    if (headerInput.value.trim() === '') {
     } else {
-        event.preventDefault();
         const newTodo = {
             value: headerInput.value,
+            complete: false
         };
         todoData.push(newTodo);
         jsonStringify();
