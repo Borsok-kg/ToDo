@@ -15,10 +15,8 @@ let jsonSave = function() {
 };
 
 let jsonDisplay = function() {
-    if (todoData === []) {
-        let b = localStorage.toDo;
-        console.log(b);
-        todoData = JSON.parse(b);
+    if (localStorage.toDo) {
+        todoData = JSON.parse(localStorage.toDo);
     }
 };
 
